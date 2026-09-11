@@ -1,3 +1,5 @@
+<img width="1672" height="941" alt="jellyfin-plugin-AD-Account-Sync" src="https://github.com/user-attachments/assets/ab267603-aaf4-4361-b2ba-62ca0e56738e" />
+
 # AD Account Sync
 
 Jellyfin 12.0.0 release of AD Account Sync.
