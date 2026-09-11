@@ -1,0 +1,23 @@
+[
+  {
+    "owner": "aober420",
+    "category": "Authentication",
+    "overview": "Jellyfin 12.0.0 release of AD Account Sync.",
+    "name": "AD Account Sync",
+    "versions": [
+      {
+        "timestamp": "2026-09-11T00:00:00Z",
+        "sourceUrl": "https://raw.githubusercontent.com/aober420/AD-Account-Sync/main/releases/AD%20Account%20Sync_1.0.0.0.zip",
+        "version": "1.0.0.0",
+        "changelog": "Jellyfin 12.0.0 release of AD Account Sync.",
+        "checksum": "dfa2f8d74384bad72e4872731c835bf9",
+        "targetAbi": "12.0.0.0",
+        "repositoryName": "AD Account Sync",
+        "repositoryUrl": "https://github.com/aober420/AD-Account-Sync"
+      }
+    ],
+    "description": "Jellyfin 12.0.0 release of AD Account Sync.",
+    "guid": "e8261d23-9083-4f20-a9e8-6cf5952ba31c",
+    "imageUrl": "https://raw.githubusercontent.com/aober420/AD-Account-Sync/main/images/jellyfin-plugin-AD-Account-Sync.png"
+  }
+]

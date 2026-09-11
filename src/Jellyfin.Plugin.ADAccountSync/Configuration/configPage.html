@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8" /><title>AD Account Sync</title></head>
+<body>
+<div id="adAccountDisableSyncConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-checkbox">
+  <div data-role="content"><div class="content-primary">
+    <form id="adAccountDisableSyncConfigForm">
+      <h2>AD Account Sync</h2>
+      <p>Uses the LDAP server, bind account, Base DN, and TLS settings from LDAP-Auth.</p>
+      <label class="checkboxContainer"><input id="enabled" type="checkbox" is="emby-checkbox" /><span>Enable synchronization</span></label>
+      <div class="inputContainer"><label class="inputLabel" for="usernameAttribute">AD username attribute</label><input id="usernameAttribute" type="text" is="emby-input" required="required" /><div class="fieldDescription">Usually <code>sAMAccountName</code>; it must match the user names LDAP-Auth creates.</div></div>
+      <div class="inputContainer"><label class="inputLabel" for="userFilter">AD user filter</label><input id="userFilter" type="text" is="emby-input" required="required" /><div class="fieldDescription">The disabled-account condition is added automatically. Default: <code>(objectCategory=person)</code>.</div></div>
+      <label class="checkboxContainer"><input id="includeNonLdapAuthUsers" type="checkbox" is="emby-checkbox" /><span>Also include local Jellyfin users</span></label>
+      <div class="fieldDescription" style="margin-top: -0.35em; margin-bottom: 1.5em;">Leave this off unless matching non-LDAP-Auth accounts should also be disabled.</div>
+      <label class="checkboxContainer"><input id="autoReEnableUsers" type="checkbox" is="emby-checkbox" /><span>Re-enable users when their AD account is enabled</span></label>
+      <div class="fieldDescription">On by default. Any matching disabled Jellyfin account is re-enabled after AD confirms the account is enabled.</div>
+      <div><button is="emby-button" type="submit" class="raised button-submit block emby-button"><span>Save</span></button></div>
+    </form>
+  </div></div>
+<script type="text/javascript">
+var AdAccountDisableSyncConfig = {
+  pluginId: 'e8261d23-9083-4f20-a9e8-6cf5952ba31c',
+  load: function (page) {
+    if (typeof ApiClient === 'undefined' || !ApiClient.getPluginConfiguration) {
+      setTimeout(function () { AdAccountDisableSyncConfig.load(page); }, 100);
+      return;
+    }
+
+    Dashboard.showLoadingMsg();
+    ApiClient.getPluginConfiguration(this.pluginId).then(function (config) {
+      page.querySelector('#enabled').checked = config.Enabled !== false;
+      page.querySelector('#usernameAttribute').value = config.UsernameAttribute || 'sAMAccountName';
+      page.querySelector('#userFilter').value = config.UserFilter || '(objectCategory=person)';
+      page.querySelector('#includeNonLdapAuthUsers').checked = config.IncludeNonLdapAuthUsers === true;
+      page.querySelector('#autoReEnableUsers').checked = config.AutoReEnableUsers !== false;
+      Dashboard.hideLoadingMsg();
+    }).catch(function (error) {
+      Dashboard.hideLoadingMsg();
+      console.error('Unable to load AD Account Sync configuration.', error);
+    });
+  },
+  save: function (page) {
+    var self = this;
+    Dashboard.showLoadingMsg();
+    ApiClient.getPluginConfiguration(self.pluginId).then(function (config) {
+      config.Enabled = page.querySelector('#enabled').checked;
+      config.UsernameAttribute = page.querySelector('#usernameAttribute').value.trim();
+      config.UserFilter = page.querySelector('#userFilter').value.trim();
+      config.IncludeNonLdapAuthUsers = page.querySelector('#includeNonLdapAuthUsers').checked;
+      config.AutoReEnableUsers = page.querySelector('#autoReEnableUsers').checked;
+      return ApiClient.updatePluginConfiguration(self.pluginId, config);
+    }).then(function (result) { Dashboard.processPluginConfigurationUpdateResult(result); });
+  }
+};
+document.querySelector('#adAccountDisableSyncConfigForm').addEventListener('submit', function (event) { event.preventDefault(); AdAccountDisableSyncConfig.save(document.querySelector('#adAccountDisableSyncConfigPage')); return false; });
+document.querySelector('#adAccountDisableSyncConfigPage').addEventListener('pageshow', function () { AdAccountDisableSyncConfig.load(this); });
+AdAccountDisableSyncConfig.load(document.querySelector('#adAccountDisableSyncConfigPage'));
+</script>
+</div>
+</body>
+</html>
