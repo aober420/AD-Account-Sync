@@ -1,7 +1,7 @@
 [
   {
     "owner": "aober420",
-    "category": "Authentication",
+    "category": "Administration",
     "overview": "Jellyfin 12.0.0 release of AD Account Sync.",
     "name": "AD Account Sync",
     "versions": [
