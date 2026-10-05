@@ -9,7 +9,7 @@
         "timestamp": "2026-09-11T00:00:00Z",
         "sourceUrl": "https://raw.githubusercontent.com/aober420/AD-Account-Sync/main/releases/AD%20Account%20Sync_1.0.0.0.zip",
         "version": "1.0.0.0",
-        "changelog": "Jellyfin 12.0.0 release of AD Account Sync.",
+        "changelog": "## ✨ New Features\n\n- **AD account status:** Disable matching LDAP-Auth-managed Jellyfin users when their Active Directory accounts are disabled.\n- **Account reactivation:** Re-enable matching users when their AD accounts are enabled, if this option is enabled.\n- **LDAP settings:** Use the server, bind account, Base DN, and TLS settings already configured in LDAP-Auth.\n- **Scheduled sync:** Check every 15 minutes or run Sync Active Directory account status manually from Scheduled Tasks.\n\nRequires Jellyfin 12.0.0 and a working LDAP-Auth v24 configuration.",
         "checksum": "dfa2f8d74384bad72e4872731c835bf9",
         "targetAbi": "12.0.0.0",
         "repositoryName": "AD Account Sync",
