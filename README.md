@@ -22,7 +22,7 @@ https://raw.githubusercontent.com/aober420/AD-Account-Sync/main/manifest.json
 ```
 
 4. Save, then open **Dashboard → Plugins → Catalog**.
-5. Find **AD Account Sync**, install it, and restart Jellyfin when prompted.
+5. Find **AD Account Sync**, install it, and restart Jellyfin when prompted
 
 ## Configure
 
