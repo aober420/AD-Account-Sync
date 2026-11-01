@@ -54,3 +54,7 @@ This release does not modify Jellyfin Web files or require permission to write t
 ## Releases
 
 Downloadable builds are available on the [Releases page](https://github.com/aober420/AD-Account-Sync/releases).
+
+## License
+
+Copyright (c) 2026 aober420 (Aober). Plugin source is licensed under **GPL-3.0-only**. See [LICENSE](LICENSE) and [NOTICE](NOTICE). Third-party components retain their respective licenses.

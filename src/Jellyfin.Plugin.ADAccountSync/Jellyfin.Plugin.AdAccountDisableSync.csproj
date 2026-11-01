@@ -9,6 +9,7 @@
     <FileVersion>1.0.2.1</FileVersion>
     <Authors>aober420</Authors>
     <Company>aober420</Company>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/aober420/AD-Account-Sync</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
