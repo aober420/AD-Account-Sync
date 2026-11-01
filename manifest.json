@@ -11,7 +11,7 @@
         "version": "1.0.1.0",
         "changelog": "Jellyfin 12.4.0 release. Runs AD account synchronization every 5 minutes instead of every 15 minutes.",
         "checksum": "d5af665260d96aacf8da0c3ea2140c00",
-        "targetAbi": "12.4.0.0",
+        "targetAbi": "12.0.0.0",
         "repositoryName": "AD Account Sync",
         "repositoryUrl": "https://github.com/aober420/AD-Account-Sync"
       },
