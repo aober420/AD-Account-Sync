@@ -38,14 +38,21 @@ internal sealed class SyncTimerService(
             await started.Task.WaitAsync(stoppingToken).ConfigureAwait(false);
             plugin = Plugin.Instance ?? throw new InvalidOperationException("AD Account Sync is unavailable.");
 
-            var worker = taskManager.ScheduledTasks.FirstOrDefault(task => task.ScheduledTask is AdAccountDisableSyncTask)
-                ?? throw new InvalidOperationException("AD Account Sync scheduled task is unavailable.");
-            var remaining = worker.Triggers.Where(trigger => trigger.Type != TaskTriggerInfoType.IntervalTrigger).ToArray();
+            // ApplicationStarted can fire before Jellyfin has added plugin tasks.
+            IScheduledTaskWorker? worker;
+            logger.LogInformation("AD Account Sync timer is waiting for its scheduled task to be registered.");
+            while ((worker = taskManager.ScheduledTasks.FirstOrDefault(task => task.ScheduledTask.Key == "AdAccountDisableSync")) is null)
+            {
+                await Task.Delay(TimeSpan.FromSeconds(1), timeProvider, stoppingToken).ConfigureAwait(false);
+            }
+
+            var remaining = worker.Triggers.Where(trigger => trigger.Type != TaskTriggerInfoType.IntervalTrigger
+                && trigger.Type != TaskTriggerInfoType.StartupTrigger).ToArray();
             if (remaining.Length != worker.Triggers.Count())
             {
                 // The setter persists the triggers and reloads them through Jellyfin's scheduler.
                 worker.Triggers = remaining;
-                logger.LogInformation("AD Account Sync removed its old scheduled interval trigger. Automatic sync now uses the plugin timer.");
+                logger.LogInformation("AD Account Sync removed its old interval and startup triggers. Automatic sync now uses the plugin timer.");
             }
 
             plugin.ScheduleChanged += OnSettingsChanged;
@@ -77,12 +84,12 @@ internal sealed class SyncTimerService(
                     continue;
                 }
 
-                if (plugin.Configuration.Enabled)
+                if (plugin.Configuration.Enabled && worker.State == TaskState.Idle)
                 {
                     try
                     {
                         // Use Jellyfin's worker for progress, cancellation, and non-overlapping manual/timed runs.
-                        taskManager.QueueIfNotRunning<AdAccountDisableSyncTask>();
+                        taskManager.QueueScheduledTask(worker.ScheduledTask, new TaskOptions());
                     }
                     catch (Exception ex)
                     {

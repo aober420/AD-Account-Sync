@@ -39,7 +39,7 @@ The defaults are designed for LDAP-Auth users:
 
 Set **Sync interval (minutes)** and select **Save** to restart the plugin timer with the chosen interval. Disabling synchronization pauses automatic syncing.
 
-After updating to 1.0.2.0, restart Jellyfin. The plugin automatically removes its old interval triggers from Scheduled Tasks. Existing startup or other non-interval triggers are preserved. You do not need an interval trigger for automatic syncing.
+After updating to 1.0.2.1, restart Jellyfin. The plugin waits for task registration, then automatically removes its old interval and startup triggers from Scheduled Tasks. Custom daily or weekly triggers are preserved. You do not need an interval or startup trigger for automatic syncing.
 
 Use **Dashboard → Scheduled Tasks → AD Account Sync → Sync Active Directory account status** to test a change immediately. Manual and timed runs share Jellyfin's task worker to prevent overlapping synchronization.
 

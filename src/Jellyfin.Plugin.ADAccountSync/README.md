@@ -24,4 +24,4 @@ Jellyfin 12.4.0 release of AD Account Sync.
 
 - Sync interval: 5 minutes, managed by the plugin's internal timer.
 
-On startup, version 1.0.2.0 removes this task's existing interval triggers; non-interval triggers are preserved. Manual sync remains available. The configured AD query returns both enabled and disabled users so account status can be synchronized in either direction.
+On startup, version 1.0.2.1 waits for task registration and removes this task's existing interval and startup triggers; custom daily and weekly triggers are preserved. Manual sync remains available. The configured AD query returns both enabled and disabled users so account status can be synchronized in either direction.
