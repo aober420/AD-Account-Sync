@@ -9,7 +9,8 @@ It keeps LDAP-Auth-managed Jellyfin user accounts aligned with AD account status
 - Disables the matching Jellyfin user when their AD account is disabled.
 - Re-enables the matching Jellyfin user when their AD account is enabled, if that option is enabled.
 - Uses the LDAP server, bind account, Base DN, and TLS settings already configured in LDAP-Auth.
-- Runs every 5 minutes, or can be run immediately from Jellyfin Dashboard → Scheduled Tasks.
+- Runs on its own timer every 5 minutes by default; choose 5–1440 minutes in the plugin settings.
+- Can be run immediately from Jellyfin Dashboard → Scheduled Tasks → AD Account Sync.
 
 ## Install from the Jellyfin repository
 
@@ -34,8 +35,15 @@ The defaults are designed for LDAP-Auth users:
 - User filter: `(objectCategory=person)`
 - Local Jellyfin users: excluded
 - Re-enable users when their AD account is enabled: enabled
+- Sync interval: 5 minutes (minimum 5; maximum 1440)
 
-Use **Dashboard → Scheduled Tasks → Sync Active Directory account status** to test a change immediately.
+Set **Sync interval (minutes)** and select **Save** to restart the plugin timer with the chosen interval. Disabling synchronization pauses automatic syncing.
+
+After updating to 1.0.2.0, restart Jellyfin. The plugin automatically removes its old interval triggers from Scheduled Tasks. Existing startup or other non-interval triggers are preserved. You do not need an interval trigger for automatic syncing.
+
+Use **Dashboard → Scheduled Tasks → AD Account Sync → Sync Active Directory account status** to test a change immediately. Manual and timed runs share Jellyfin's task worker to prevent overlapping synchronization.
+
+This release does not modify Jellyfin Web files or require permission to write to the web directory.
 
 ## Requirements
 

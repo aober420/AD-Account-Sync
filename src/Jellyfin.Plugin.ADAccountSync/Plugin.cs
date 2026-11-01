@@ -8,6 +8,20 @@ namespace Jellyfin.Plugin.AdAccountDisableSync;
 /// <summary>The plugin entry point.</summary>
 public sealed class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
 {
+    internal event Action? ScheduleChanged;
+
+    /// <inheritdoc />
+    public override void UpdateConfiguration(BasePluginConfiguration configuration)
+    {
+        if (configuration is not PluginConfiguration settings || settings.SyncIntervalMinutes is < 5 or > 1440)
+        {
+            throw new ArgumentException("Sync interval must be between 5 and 1440 minutes.", nameof(configuration));
+        }
+
+        base.UpdateConfiguration(configuration);
+        ScheduleChanged?.Invoke();
+    }
+
     /// <summary>Initializes a new instance of the <see cref="Plugin"/> class.</summary>
     public Plugin(IApplicationPaths applicationPaths, IXmlSerializer xmlSerializer)
         : base(applicationPaths, xmlSerializer)

@@ -8,8 +8,9 @@
       <h2>AD Account Sync</h2>
       <p>Uses the LDAP server, bind account, Base DN, and TLS settings from LDAP-Auth.</p>
       <label class="checkboxContainer"><input id="enabled" type="checkbox" is="emby-checkbox" /><span>Enable synchronization</span></label>
+      <div class="inputContainer"><label class="inputLabel" for="syncIntervalMinutes">Sync interval (minutes)</label><input id="syncIntervalMinutes" type="number" min="5" max="1440" step="1" is="emby-input" required="required" /><div class="fieldDescription">Default: 5 minutes. Choose 5–1440 minutes. Save to restart the plugin timer with this interval. Automatic synchronization uses the plugin timer; its old interval trigger is removed on startup. You can still run a sync manually from Scheduled Tasks → AD Account Sync.</div></div>
       <div class="inputContainer"><label class="inputLabel" for="usernameAttribute">AD username attribute</label><input id="usernameAttribute" type="text" is="emby-input" required="required" /><div class="fieldDescription">Usually <code>sAMAccountName</code>; it must match the user names LDAP-Auth creates.</div></div>
-      <div class="inputContainer"><label class="inputLabel" for="userFilter">AD user filter</label><input id="userFilter" type="text" is="emby-input" required="required" /><div class="fieldDescription">The disabled-account condition is added automatically. Default: <code>(objectCategory=person)</code>.</div></div>
+      <div class="inputContainer"><label class="inputLabel" for="userFilter">AD user filter</label><input id="userFilter" type="text" is="emby-input" required="required" /><div class="fieldDescription">Include both enabled and disabled AD users so their status can be synchronized. Default: <code>(objectCategory=person)</code>.</div></div>
       <label class="checkboxContainer"><input id="includeNonLdapAuthUsers" type="checkbox" is="emby-checkbox" /><span>Also include local Jellyfin users</span></label>
       <div class="fieldDescription" style="margin-top: -0.35em; margin-bottom: 1.5em;">Leave this off unless matching non-LDAP-Auth accounts should also be disabled.</div>
       <label class="checkboxContainer"><input id="autoReEnableUsers" type="checkbox" is="emby-checkbox" /><span>Re-enable users when their AD account is enabled</span></label>
@@ -29,6 +30,7 @@ var AdAccountDisableSyncConfig = {
     Dashboard.showLoadingMsg();
     ApiClient.getPluginConfiguration(this.pluginId).then(function (config) {
       page.querySelector('#enabled').checked = config.Enabled !== false;
+      page.querySelector('#syncIntervalMinutes').value = config.SyncIntervalMinutes || 5;
       page.querySelector('#usernameAttribute').value = config.UsernameAttribute || 'sAMAccountName';
       page.querySelector('#userFilter').value = config.UserFilter || '(objectCategory=person)';
       page.querySelector('#includeNonLdapAuthUsers').checked = config.IncludeNonLdapAuthUsers === true;
@@ -44,12 +46,17 @@ var AdAccountDisableSyncConfig = {
     Dashboard.showLoadingMsg();
     ApiClient.getPluginConfiguration(self.pluginId).then(function (config) {
       config.Enabled = page.querySelector('#enabled').checked;
+      config.SyncIntervalMinutes = Number(page.querySelector('#syncIntervalMinutes').value);
       config.UsernameAttribute = page.querySelector('#usernameAttribute').value.trim();
       config.UserFilter = page.querySelector('#userFilter').value.trim();
       config.IncludeNonLdapAuthUsers = page.querySelector('#includeNonLdapAuthUsers').checked;
       config.AutoReEnableUsers = page.querySelector('#autoReEnableUsers').checked;
       return ApiClient.updatePluginConfiguration(self.pluginId, config);
-    }).then(function (result) { Dashboard.processPluginConfigurationUpdateResult(result); });
+    }).then(function (result) { Dashboard.processPluginConfigurationUpdateResult(result); }).catch(function (error) {
+      Dashboard.hideLoadingMsg();
+      console.error('Unable to save AD Account Sync configuration.', error);
+      Dashboard.alert('Unable to save settings. Check the server logs and try again.');
+    });
   }
 };
 document.querySelector('#adAccountDisableSyncConfigForm').addEventListener('submit', function (event) { event.preventDefault(); AdAccountDisableSyncConfig.save(document.querySelector('#adAccountDisableSyncConfigPage')); return false; });

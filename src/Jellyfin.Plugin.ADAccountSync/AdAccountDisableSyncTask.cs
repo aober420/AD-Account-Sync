@@ -30,14 +30,14 @@ public sealed class AdAccountDisableSyncTask : IScheduledTask
     public string Description => "Disables or, when enabled in settings, re-enables LDAP-Auth users to match Active Directory.";
 
     /// <inheritdoc />
-    public string Category => "Users";
+    public string Category => "AD Account Sync";
 
     /// <inheritdoc />
     public string Key => "AdAccountDisableSync";
 
     /// <inheritdoc />
     public IEnumerable<TaskTriggerInfo> GetDefaultTriggers()
-        => [new TaskTriggerInfo { Type = TaskTriggerInfoType.IntervalTrigger, IntervalTicks = TimeSpan.FromMinutes(5).Ticks }];
+        => [];
 
     /// <inheritdoc />
     public async Task ExecuteAsync(IProgress<double> progress, CancellationToken cancellationToken)

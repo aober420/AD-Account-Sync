@@ -8,6 +8,9 @@ public class PluginConfiguration : BasePluginConfiguration
     /// <summary>Gets or sets a value indicating whether the scheduled task makes changes.</summary>
     public bool Enabled { get; set; } = true;
 
+    /// <summary>Gets or sets the internal synchronization interval, in minutes (5–1440).</summary>
+    public int SyncIntervalMinutes { get; set; } = 5;
+
     /// <summary>Gets or sets the AD attribute matching the Jellyfin username.</summary>
     public string UsernameAttribute { get; set; } = "sAMAccountName";
 
@@ -19,4 +22,5 @@ public class PluginConfiguration : BasePluginConfiguration
 
     /// <summary>Gets or sets a value indicating whether matching enabled AD accounts re-enable Jellyfin users.</summary>
     public bool AutoReEnableUsers { get; set; } = true;
+
 }

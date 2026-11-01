@@ -7,6 +7,16 @@
     "versions": [
       {
         "timestamp": "2026-11-01T00:00:00Z",
+        "sourceUrl": "https://raw.githubusercontent.com/aober420/AD-Account-Sync/main/releases/AD%20Account%20Sync_1.0.2.0.zip",
+        "version": "1.0.2.0",
+        "changelog": "## New Features\n\n- Internal sync timer with a configurable interval of 5–1440 minutes; default 5 minutes.\n\n## Improvements\n\n- Removes the plugin's old Scheduled Tasks interval triggers on startup.\n- Groups the manual sync task under AD Account Sync.\n- Saving settings resets the timer. Manual sync remains available and uses the same task worker.\n- No Jellyfin Web file modifications required.\n\nBuilt against Jellyfin 12.4.0.",
+        "checksum": "5e17e18922555d7da495f0b2d68a7e74",
+        "targetAbi": "12.0.0.0",
+        "repositoryName": "AD Account Sync",
+        "repositoryUrl": "https://github.com/aober420/AD-Account-Sync"
+      },
+      {
+        "timestamp": "2026-11-01T00:00:00Z",
         "sourceUrl": "https://raw.githubusercontent.com/aober420/AD-Account-Sync/main/releases/AD%20Account%20Sync_1.0.1.0.zip",
         "version": "1.0.1.0",
         "changelog": "Jellyfin 12.4.0 release. Runs AD account synchronization every 5 minutes instead of every 15 minutes.",
