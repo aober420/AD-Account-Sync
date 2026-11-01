@@ -2,14 +2,14 @@
 
 # AD Account Sync
 
-Jellyfin 12.0.0 release of AD Account Sync.
+Jellyfin 12.4.0 release of AD Account Sync.
 
 It keeps LDAP-Auth-managed Jellyfin user accounts aligned with AD account status:
 
 - Disables the matching Jellyfin user when their AD account is disabled.
 - Re-enables the matching Jellyfin user when their AD account is enabled, if that option is enabled.
 - Uses the LDAP server, bind account, Base DN, and TLS settings already configured in LDAP-Auth.
-- Runs every 15 minutes, or can be run immediately from Jellyfin Dashboard → Scheduled Tasks.
+- Runs every 5 minutes, or can be run immediately from Jellyfin Dashboard → Scheduled Tasks.
 
 ## Install from the Jellyfin repository
 
@@ -39,7 +39,7 @@ Use **Dashboard → Scheduled Tasks → Sync Active Directory account status** t
 
 ## Requirements
 
-- Jellyfin 12.0.0
+- Jellyfin 12.4.0
 - LDAP-Auth v24 configured and working
 - The LDAP bind account must be allowed to read `userAccountControl` and the configured username attribute
 

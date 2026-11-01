@@ -1,6 +1,6 @@
 # AD Account Sync
 
-Jellyfin 12.0.0 release of AD Account Sync.
+Jellyfin 12.4.0 release of AD Account Sync.
 
 ## Safety behavior
 

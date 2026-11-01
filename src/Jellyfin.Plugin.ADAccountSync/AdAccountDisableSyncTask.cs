@@ -37,7 +37,7 @@ public sealed class AdAccountDisableSyncTask : IScheduledTask
 
     /// <inheritdoc />
     public IEnumerable<TaskTriggerInfo> GetDefaultTriggers()
-        => [new TaskTriggerInfo { Type = TaskTriggerInfoType.IntervalTrigger, IntervalTicks = TimeSpan.FromMinutes(15).Ticks }];
+        => [new TaskTriggerInfo { Type = TaskTriggerInfoType.IntervalTrigger, IntervalTicks = TimeSpan.FromMinutes(5).Ticks }];
 
     /// <inheritdoc />
     public async Task ExecuteAsync(IProgress<double> progress, CancellationToken cancellationToken)

@@ -4,9 +4,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Version>1.0.0.0</Version>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <Version>1.0.1.0</Version>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
     <Authors>aober420</Authors>
     <Company>aober420</Company>
     <RepositoryUrl>https://github.com/aober420/AD-Account-Sync</RepositoryUrl>
@@ -15,10 +15,10 @@
     <PackageProjectUrl>https://github.com/aober420/AD-Account-Sync</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Jellyfin.Controller" Version="12.0.0">
+    <PackageReference Include="Jellyfin.Controller" Version="12.4.0">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
-    <PackageReference Include="Jellyfin.Model" Version="12.0.0">
+    <PackageReference Include="Jellyfin.Model" Version="12.4.0">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="Novell.Directory.Ldap.NETStandard" Version="3.6.0" />
