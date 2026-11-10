@@ -2,7 +2,7 @@
 
 # AD Account Sync
 
-Jellyfin 12.4.0 release of AD Account Sync.
+AD Account Sync for Jellyfin 12.x (12.4 or later).
 
 It keeps LDAP-Auth-managed Jellyfin user accounts aligned with AD account status:
 
@@ -47,7 +47,7 @@ This release does not modify Jellyfin Web files or require permission to write t
 
 ## Requirements
 
-- Jellyfin 12.4.0
+- Jellyfin 12.4 or later within the 12.x series. The current build targets Jellyfin 12.4.0; compatibility with earlier 12.x releases is not verified.
 - LDAP-Auth v24 configured and working
 - The LDAP bind account must be allowed to read `userAccountControl` and the configured username attribute
 

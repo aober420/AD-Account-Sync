@@ -2,7 +2,7 @@
   {
     "owner": "aober420",
     "category": "Administration",
-    "overview": "Jellyfin 12.4.0 release of AD Account Sync.",
+    "overview": "AD Account Sync for Jellyfin 12.x (12.4 or later). Current build targets Jellyfin 12.4.0; compatibility with earlier 12.x releases is not verified.",
     "name": "AD Account Sync",
     "versions": [
       {
@@ -46,7 +46,7 @@
         "repositoryUrl": "https://github.com/aober420/AD-Account-Sync"
       }
     ],
-    "description": "Jellyfin 12.4.0 release of AD Account Sync.",
+    "description": "AD Account Sync for Jellyfin 12.x (12.4 or later). Current build targets Jellyfin 12.4.0; compatibility with earlier 12.x releases is not verified.",
     "guid": "e8261d23-9083-4f20-a9e8-6cf5952ba31c",
     "imageUrl": "https://raw.githubusercontent.com/aober420/AD-Account-Sync/main/images/jellyfin-plugin-AD-Account-Sync.png"
   }

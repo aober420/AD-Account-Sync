@@ -1,6 +1,6 @@
 # AD Account Sync
 
-Jellyfin 12.4.0 release of AD Account Sync.
+AD Account Sync for Jellyfin 12.x (12.4 or later). The current build targets Jellyfin 12.4.0; compatibility with earlier 12.x releases is not verified.
 
 ## Safety behavior
 
